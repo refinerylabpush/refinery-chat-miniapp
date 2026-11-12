@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Refinery Chat</title>
+    <style>
+      html, body, #root { height: 100%; width: 100%; margin: 0; }
+      #boot { display: flex; height: 100%; align-items: center; justify-content: center; font: 14px system-ui, sans-serif; color: #9ca3af; }
+    </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <div id="root"><div id="boot">Загрузка…</div></div>
+    <!--
+      Стартовая страница мини-приложения Telegram. Supabase отдаёт HTML на GET как простой текст, а Telegram открывает страницу
+      именно так, поэтому сама страница лежит здесь, а код приложения и данные остаются в Supabase. Этот файл не меняется при
+      обновлениях приложения: какие файлы грузить, подсказывает manifest.json.
+    -->
+    <script>
+      (async function () {
+        var BASE = 'https://rcdejyidcxubahgtxcar.supabase.co/functions/v1/bitrix-handler'
+        try {
+          var res = await fetch(BASE + '/manifest.json', { cache: 'no-store' })
+          var m = await res.json()
+          m.css.forEach(function (c) {
+            var l = document.createElement('link')
+            l.rel = 'stylesheet'
+            l.href = BASE + '/' + c
+            document.head.appendChild(l)
+          })
+          m.js.forEach(function (j) {
+            var s = document.createElement('script')
+            s.type = 'module'
+            s.crossOrigin = 'anonymous'
+            s.src = BASE + '/' + j
+            document.body.appendChild(s)
+          })
+        } catch (e) {
+          document.getElementById('boot').textContent = 'Не удалось загрузить. Закройте и откройте снова.'
+        }
+      })()
+    </script>
+  </body>
+</html>
