@@ -12,13 +12,13 @@
       #boot img { display: block; width: 100%; }
       #boot .base { opacity: .14; }
       #boot .sweep { position: absolute; inset: 0;
-        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 48%); mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 48%);
-        -webkit-mask-size: 300% 100%; mask-size: 300% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-        animation: sweep 2.4s cubic-bezier(.5, .1, .3, 1) infinite; }
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 32%, transparent 70%); mask-image: linear-gradient(90deg, #000 0%, #000 32%, transparent 70%);
+        -webkit-mask-size: 320% 100%; mask-size: 320% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+        -webkit-mask-position: 100% 0; mask-position: 100% 0;
+        animation: sweep 3.2s infinite alternate; }
       @keyframes sweep {
-        0% { -webkit-mask-position: 100% 0; mask-position: 100% 0; opacity: 1; }
-        62%, 86% { -webkit-mask-position: 0% 0; mask-position: 0% 0; opacity: 1; }
-        100% { -webkit-mask-position: 0% 0; mask-position: 0% 0; opacity: 0; }
+        0%, 8% { -webkit-mask-position: 100% 0; mask-position: 100% 0; animation-timing-function: cubic-bezier(.45, .05, .25, 1); }
+        92%, 100% { -webkit-mask-position: 0% 0; mask-position: 0% 0; }
       }
       #boot p { margin: 20px 0 0; height: 16px; font-size: 11px; color: #9ca3af; animation: phrase 2s ease-in-out both; }
       @keyframes phrase { 0% { opacity: 0; } 20%, 80% { opacity: 1; } 100% { opacity: 0; } }
